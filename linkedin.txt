@@ -1,0 +1,19 @@
+import time
+from selenium import webdriver
+# import chrome in webdriver
+from selenium.webdriver import Chrome
+#import pandas 
+import pandas as pd
+#import selenium webdriver webdriver
+from selenium.webdriver.common.keys import Keys as key
+import warnings
+warnings.filterwarnings('ignore')
+
+df = pd.read_csv(r"C:\Users\goura\OneDrive\Desktop\linkdien.csv")
+
+url = r'https://www.linkedin.com/'
+doc = webdriver.Chrome(executable_path=r"C:\Users\goura\OneDrive\Desktop\fyersdata\chromedriver.exe")
+doc.get(url)
+
+doc.find_element_by_xpath("//input[@placeholder='Search']").send_keys(f'{df["first_name"][0]} {"." if df["last_name"][0]!="." else ""} {df["company"][0]}')
+doc.find_element_by_xpath("//input[@placeholder='Search']").send_keys(key.ENTER)
